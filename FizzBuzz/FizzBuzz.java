@@ -3,6 +3,9 @@
 	if divisible by 5, output buzz.
 	if divisible by both, output fizzbuzz.
 	using % to check remainder.
+	
+	Created by Jeremy Reynolds.
+	Last Updated: September 3rd
 
 */
 
