@@ -1,5 +1,7 @@
 /*
 	created by Jeremy Reynolds
+	
+	going to implement 2 action listeners, one for numbers and one for operations instead of having one generic actionListener
 */
 
 import javax.swing.*;
@@ -12,7 +14,13 @@ public class JavaCalculator{
 		Calculator main = new Calculator();
 	}
 }
-class Calculator extends JPanel implements ActionListener{
+
+class Calculator extends JPanel{
+	double current, next;
+	JButton period, zero, one, two, three, four, five, six, seven, eight, nine, divide, multiply, subtract, add, equals;
+	JTextField display;
+	boolean startNumber = true;
+	
 	public Calculator(){
 		//create Calculator gui here.
 				//Border layout for textarea, number panel, and operations panel (x, +, -, /)
@@ -31,11 +39,11 @@ class Calculator extends JPanel implements ActionListener{
 				//set default closing operation	
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				//create TextArea for display
-				JTextField display = new JTextField("0", 40);
+				display = new JTextField("0", 40);
 				//add TextArea to BorderLayout North
 				frame.add(display, BorderLayout.NORTH);
 				//make display not editable
-				display.setEditable(false);
+				//display.setEditable(false);
 				
 				//create new panel to hold the buttons.
 				JPanel buttons = new JPanel();
@@ -47,44 +55,49 @@ class Calculator extends JPanel implements ActionListener{
 				
 				//create JButtons for number panel
 				//numbers 0 - 9, and .
-				JButton period = new JButton(".");
-				JButton zero = new JButton("0");
-				JButton one = new JButton("1");
-				JButton two = new JButton("2");
-				JButton three = new JButton("3");
-				JButton four = new JButton("4");
-				JButton five = new JButton("5");
-				JButton six = new JButton("6");
-				JButton seven = new JButton("7");
-				JButton eight = new JButton("8");
-				JButton nine = new JButton("9");
-				JButton divide = new JButton("/");
-				JButton multiply = new JButton("X");
-				JButton subtract = new JButton("-");
-				JButton add = new JButton("+");
-				JButton equals = new JButton("=");
+				period = new JButton(".");
+				zero = new JButton("0");
+				one = new JButton("1");
+				two = new JButton("2");
+				three = new JButton("3");
+				four = new JButton("4");
+				five = new JButton("5");
+				six = new JButton("6");
+				seven = new JButton("7");
+				eight = new JButton("8");
+				nine = new JButton("9");
+				divide = new JButton("/");
+				multiply = new JButton("X");
+				subtract = new JButton("-");
+				add = new JButton("+");
+				equals = new JButton("=");
+				
+				//create 2 action listener classes. One for Numbers and one for operations
+				
+				ActionListener nums = new numListener();
+				
+				ActionListener ops = new opListener();
 				
 				//add action listeners
-				period.addActionListener(this);
-				zero.addActionListener(this);
-				one.addActionListener(this);
-				two.addActionListener(this);
-				three.addActionListener(this);
-				four.addActionListener(this);
-				five.addActionListener(this);
-				six.addActionListener(this);
-				seven.addActionListener(this);
-				eight.addActionListener(this);
-				nine.addActionListener(this);
-				divide.addActionListener(this);
-				multiply.addActionListener(this);
-				subtract.addActionListener(this);
-				add.addActionListener(this);
-				equals.addActionListener(this);
+				period.addActionListener(nums);
+				zero.addActionListener(nums);
+				one.addActionListener(nums);
+				two.addActionListener(nums);
+				three.addActionListener(nums);
+				four.addActionListener(nums);
+				five.addActionListener(nums);
+				six.addActionListener(nums);
+				seven.addActionListener(nums);
+				eight.addActionListener(nums);
+				nine.addActionListener(nums);
 				
+
+				divide.addActionListener(ops);
+				multiply.addActionListener(ops);
+				subtract.addActionListener(ops);
+				add.addActionListener(ops);
+				equals.addActionListener(ops);
 				
-				
-						
 				//add JButtons to gridlayout starting with 0
 				buttons.add(seven);
 				buttons.add(eight);
@@ -127,9 +140,26 @@ class Calculator extends JPanel implements ActionListener{
 				frame.pack();
 				frame.setVisible(true);
 	}
-	
-	public void actionPerformed(ActionEvent e){
-		System.out.println("It works!");
+	class numListener implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+				//use e.getActionCommand() to get text from button
+				String digit = e.getActionCommand();
+				
+				if (startNumber) {
+					display.setText(digit);
+					//System.out.print(digit);
+					startNumber = false;
+				}else {
+					display.setText(display.getText() + digit);
+				}
+			}
+
 	}
+	class opListener implements ActionListener{
+			public void actionPerformed(ActionEvent e){
+					//call logic class here; OR do calculations here?
+				}
+
+		}
 
 }
