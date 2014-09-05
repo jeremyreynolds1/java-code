@@ -17,9 +17,11 @@ public class JavaCalculator{
 
 class Calculator extends JPanel{
 	double current, next;
-	JButton period, zero, one, two, three, four, five, six, seven, eight, nine, divide, multiply, subtract, add, equals;
+	JButton period, zero, one, two, three, four, five, six, seven, eight, nine, divide, multiply, subtract, add, equals, clear;
 	JTextField display;
 	boolean startNumber = true;
+	boolean currentSet;
+	String currentDisplay, previousOp;
 	
 	public Calculator(){
 		//create Calculator gui here.
@@ -71,6 +73,7 @@ class Calculator extends JPanel{
 				subtract = new JButton("-");
 				add = new JButton("+");
 				equals = new JButton("=");
+				clear = new JButton("clear");
 				
 				//create 2 action listener classes. One for Numbers and one for operations
 				
@@ -91,12 +94,14 @@ class Calculator extends JPanel{
 				eight.addActionListener(nums);
 				nine.addActionListener(nums);
 				
+				
 
 				divide.addActionListener(ops);
 				multiply.addActionListener(ops);
 				subtract.addActionListener(ops);
 				add.addActionListener(ops);
 				equals.addActionListener(ops);
+				clear.addActionListener(ops);
 				
 				//add JButtons to gridlayout starting with 0
 				buttons.add(seven);
@@ -110,6 +115,7 @@ class Calculator extends JPanel{
 				buttons.add(three);
 				buttons.add(zero);
 				buttons.add(period);
+				buttons.add(clear);
 				
 				
 				//add panel which is a borderLayout
@@ -158,8 +164,107 @@ class Calculator extends JPanel{
 	class opListener implements ActionListener{
 			public void actionPerformed(ActionEvent e){
 					//call logic class here; OR do calculations here?
+					//in each scenario need to clear data from display, store into variable, and do calculations
+					/*
+						2 variables, a current value and a next value
+						I'm trying to store the current value into a variable using a boolean trigger.
+					*/
+					String operator = e.getActionCommand();
+					if(startNumber){
+						display.setText("Error");
+					}
+					else {
+						if (operator == "=") {
+							if(currentSet){
+								currentDisplay = display.getText();
+								next = Double.parseDouble(currentDisplay);
+								//System.out.println(next);
+							}
+							if(previousOp == "-"){
+								subtract(current, next);
+							}
+							if (previousOp == "+") {
+								add(current, next);
+							}
+							if (previousOp == "X") {
+								multiply(current, next);
+							}
+							if (previousOp == "/"){
+								divide(current, next);
+							}
+							
+						}
+						if (operator == "-") {
+							current = Double.parseDouble(display.getText());
+							currentSet = true;
+							previousOp = "-";
+							display.setText("");
+						}
+						if (operator == "+") {
+							current = Double.parseDouble(display.getText());
+							currentSet = true;
+							previousOp = "+";
+							display.setText("");
+						}
+						if (operator == "X") {
+							current = Double.parseDouble(display.getText());
+							currentSet = true;
+							previousOp = "X";
+							display.setText("");
+						}
+						if (operator == "/") {
+							current = Double.parseDouble(display.getText());
+							currentSet = true;
+							previousOp = "/";
+							display.setText("");
+						}
+						if (operator == "clear") {
+							clear();
+						}
+					}
+					
 				}
-
+			public void subtract(double a, double b){
+				double first = a;
+				double second = b;
+				
+				double subResult = first - second;
+				String result = String.valueOf(subResult);
+				
+				display.setText(result);
+			}
+			public void add(double a, double b){
+				double first = a;
+				double second = b;
+				double addResult = first + second;
+				String result = String.valueOf(addResult);
+				display.setText(result);
+			}
+			public void multiply(double a, double b){
+				double first = a;
+				double second = b;
+				double addResult = first * second;
+				String result = String.valueOf(addResult);
+				display.setText(result);
+			}
+			public void divide(double a, double b){
+				double first = a;
+				double second = b;
+				if(second == 0){
+					display.setText("cannot divide by zero");
+				}
+				else {
+					double addResult = first + second;
+					String result = String.valueOf(addResult);
+					display.setText(result);
+				}
+				
+			}
+			public void clear(){
+				current = next = 0;
+				display.setText("");
+				currentSet = false;
+			}
 		}
 
 }
