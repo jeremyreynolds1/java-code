@@ -131,12 +131,119 @@ class TicTac extends JPanel{
 					display.setText("Player 1 turn");
 				}
 				//need to check for pattern of 3.
-				//8 ways to win
 				/*
+					8 ways to win
 					3 vertical
 					3 horizontal
 					2 vertical
-				//*/
+				*/
+				//button1.getText()
+				//horizontal wins
+				/*
+					board layout:
+					1,2,3
+					4,5,6
+					7,8,9
+				*/
+				//row 1
+				if ((button1.getText() == button2.getText()) && (button2.getText() == button3.getText()) && (button1.getText() != "")) {
+					if (button1.getText() == "X") {
+						player1win = true;
+						player2win = false;
+					}
+					else if (button1.getText() == "O"){
+						player2win = true;
+						player1win = false;
+					}
+				}
+				//row 2
+				if((button4.getText() == button5.getText()) && (button5.getText() == button6.getText()) && (button4.getText() != "")){
+					if (button4.getText() == "X") {
+							player1win = true;
+							player2win = false;
+						}
+					else if (button4.getText() == "O"){
+							player2win = true;
+							player1win = false;
+						}
+				}
+				//row 3
+				if((button7.getText() == button8.getText()) && (button8.getText() == button9.getText()) && (button7.getText() != "")){
+					if (button7.getText() == "X") {
+							player1win = true;
+							player2win = false;
+						}
+					else if (button7.getText() == "O"){
+							player2win = true;
+							player1win = false;
+						}
+					}
+				//vertical wins
+				//column 1 (1,4,7)
+				if ((button1.getText() == button4.getText()) && (button4.getText() == button7.getText()) && (button1.getText() != "")) {
+					if (button1.getText() == "X") {
+						player1win = true;
+						player2win = false;
+					} 
+					else if(button1.getText() == "O") {
+						player2win = true;
+						player1win = false;
+					}
+				}
+				//column 2 (2, 5, 8)
+				if ((button2.getText() == button5.getText()) && (button5.getText() == button8.getText()) && (button2.getText() != "")) {
+					if (button2.getText() == "X") {
+						player1win = true;
+						player2win = false;
+					} 
+					else if(button2.getText() == "O") {
+						player2win = true;
+						player1win = false;
+					}
+				}
+				//column 3 (3, 6, 9)
+				if ((button3.getText() == button6.getText()) && (button6.getText() == button9.getText()) && (button3.getText() != "")) {
+					if (button3.getText() == "X") {
+						player1win = true;
+						player2win = false;
+					} 
+					else if(button3.getText() == "O") {
+						player2win = true;
+						player1win = false;
+					}
+				}
+				//diagonal wins
+				//top left down (1, 5, 9)
+				if ((button1.getText() == button5.getText()) && (button5.getText() == button9.getText()) && (button1.getText() != "")) {
+					if (button1.getText() == "X") {
+						player1win = true;
+						player2win = false;
+					} 
+					else if(button1.getText() == "O") {
+						player2win = true;
+						player1win = false;
+					}
+				}
+				//top right down (3, 5, 7)
+				if ((button3.getText() == button5.getText()) && (button5.getText() == button7.getText()) && (button3.getText() != "")) {
+					if (button1.getText() == "X") {
+						player1win = true;
+						player2win = false;
+					} 
+					else if(button1.getText() == "O") {
+						player2win = true;
+						player1win = false;
+					}
+				}
+				//set display to player 1,2 win!
+				//might want to set JDialog to come up
+				if (player1win == true) {
+					display.setText("Player 1 wins!");
+				}
+				else if(player2win == true) {
+					display.setText("Player 2 wins!");
+					
+				}
 		}
 		
 	}
