@@ -104,6 +104,14 @@ class TicTac extends JPanel{
 		
 		frame.add(display, BorderLayout.NORTH);
 		
+		//add reset button to right side of frame
+		
+		JPanel resetLayout = new JPanel();
+		JButton resetButton = new JButton("reset");
+		resetButton.addActionListener(selection);
+		resetLayout.add(resetButton);
+		frame.add(resetLayout, BorderLayout.EAST);
+		
 		
 		frame.pack();
 		frame.setVisible(true);
@@ -235,23 +243,57 @@ class TicTac extends JPanel{
 						player1win = false;
 					}
 				}
+				
 				//set display to player 1,2 win!
 				//might want to set JDialog to come up
 				if (player1win == true) {
-					display.setText("Player 1 wins!");
-				}
-				else if(player2win == true) {
-					display.setText("Player 2 wins!");
+					//display.setText("Player 1 wins!");
+					JFrame frame = new JFrame("winner");
+					frame.setPreferredSize(new Dimension(200, 200));
+					JOptionPane.showMessageDialog(frame,"Player 1 wins");
+					reset();
 					
 				}
+				else if(player2win == true) {
+					//display.setText("Player 2 wins!");
+					JFrame frame = new JFrame("Winner");
+					frame.setPreferredSize(new Dimension(200, 200));
+					JOptionPane.showMessageDialog(frame, "Player 2 wins!");
+					reset();
+					
+				}
+				if (text == "reset") {
+					display.setText("Player 1 start");
+					button1.setText("");
+					button2.setText("");
+					button3.setText("");
+					button4.setText("");
+					button5.setText("");
+					button6.setText("");
+					button7.setText("");
+					button8.setText("");
+					button9.setText("");
+					playerOneTurn = true;
+					playerTwoTurn = false;
+					player1win = false;
+					player2win = false;
+				}
 		}
-		
+		public void reset(){
+			display.setText("Player 1 start");
+								button1.setText("");
+								button2.setText("");
+								button3.setText("");
+								button4.setText("");
+								button5.setText("");
+								button6.setText("");
+								button7.setText("");
+								button8.setText("");
+								button9.setText("");
+								playerOneTurn = true;
+								playerTwoTurn = false;
+								player1win = false;
+								player2win = false;
+		}
 	}
-	/*class modeSelection implements ActionListener{
-		public void actionPerformed(ActionEvent e){
-			//String text = e.getActionCommand()
-			//get button text for modes;
-			
-		}
-	}//*/
 }
