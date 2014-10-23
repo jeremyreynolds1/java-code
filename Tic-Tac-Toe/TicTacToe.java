@@ -28,9 +28,13 @@ class TicTac extends JPanel{
 		//set layout
 		frame.setLayout(new BorderLayout());
 		//set size
-		frame.setPreferredSize(new Dimension(400, 300));
+		frame.setPreferredSize(new Dimension(400, 400));
 		//set default close operation
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Color background = new Color(0, 157, 205);
+		//set background color
+		frame.setBackground(background);
 		
 		//create JPanel buttonLayout to add JButtons to panel
 		JPanel buttonLayout = new JPanel();
@@ -131,6 +135,9 @@ class TicTac extends JPanel{
 					playerOneTurn = false;
 					playerTwoTurn = true;
 					display.setText("Player 2 turn");
+					//Color playerOneColor = new Color(255, 178, 102);
+					//button.setForeground(playerOneColor);
+					//button.setOpaque(true);
 				}
 				else if (text.equals("") && playerTwoTurn == true) {
 					button.setText("O");
